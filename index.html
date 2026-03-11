@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body{
+    margin:0;
+    min-height:200vh;
+    background:#050505;
+    color:white;
+    font-family:Arial, sans-serif;
+    cursor:none;
+    overflow-x:hidden;
+}
+body::before{
+    content:"";
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background-image:
+    linear-gradient(white 1px,transparent 1px),
+    linear-gradient(90deg,white 1px,transparent 1px);
+    background-size:40px 40px;
+    opacity:0.15;
+    z-index:-5;
+}
+.dashboard{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    overflow:hidden;
+    padding-top:80px;
+}
+.meteor{
+    position:absolute;
+    width:140px;
+    height:4px;
+    border-radius:2px;
+    background:linear-gradient(to right, white 0%, rgba(255,255,255,0.8) 10%, transparent 100%);
+    transform:rotate(-35deg);
+    animation:meteorMove linear infinite;
+    opacity:0;
+}
+@keyframes meteorMove{
+    0%{transform:translate(200px,-200px) rotate(-35deg);opacity:1;}
+    100%{transform:translate(-1000px,700px) rotate(-35deg);opacity:0;}
+}
+.profile-card{background:rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(5px);}
+.about-card{background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(5px);}
+.project{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);transition:.35s;}
+.project:hover{transform:translateY(-8px) scale(1.05);background:rgba(255,255,255,0.08);}
+.aura{position:fixed;width:120px;height:120px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);background:conic-gradient(red,orange,yellow,lime,cyan,blue,violet,red);filter:blur(30px);opacity:0.8;animation:spin 3s linear infinite, fade 0.7s forwards;}
+@keyframes spin{from{ transform:translate(-50%,-50%) rotate(0deg);}to{ transform:translate(-50%,-50%) rotate(360deg);}}
+@keyframes fade{to{ opacity:0; transform:translate(-50%,-50%) scale(0.3);}}
+.fade{opacity:0;transform:translateY(40px);transition:1s;}
+.fade.show{opacity:1;transform:translateY(0);}
+.translate-btn{
+  position:absolute; top:4px; right:4px; z-index:50;
+  background:#1D4ED8; color:white; padding:0.5rem 1rem; border-radius:0.5rem; cursor:pointer; margin-left:0.5rem;
+}
+.translate-btn:hover{background:#2563EB;}
+</style>
+</head>
+<body>
+
+<!-- Translate Buttons -->
+<div class="flex absolute top-4 right-4 z-50">
+  <button id="translateBtn" class="translate-btn">Translate 🇮🇩</button>
+  <button id="originalBtn" class="translate-btn">English 🇺🇸</button>
+</div>
+
+<div id="trail-container"></div>
+<div id="meteors"></div>
+
+<!-- DASHBOARD -->
+<section class="dashboard">
+<h1 class="text-5xl font-bold mb-12 fade text-center">My Portfolio</h1>
+<div class="flex flex-col md:flex-row justify-start items-start gap-16 px-8 md:px-16">
+    <div class="profile-card p-8 rounded-xl w-full md:w-1/3 fade text-center">
+        <img src="WhatsApp Image 2026-03-10 at 08.32.03.jpeg" class="w-32 h-32 rounded-full mx-auto mb-4">
+        <h2 class="text-2xl font-bold mb-2">Dafano</h2>
+        <p class="text-gray-300 mb-4">Student / Web Developer</p>
+        <div class="text-left text-sm space-y-2">
+            <p>💻 HTML / CSS / JS</p>
+            <p>🎨 Web Design</p>
+            <p>🚀 Creative Coding</p>
+            <p>⚡ UI Animation</p>
+        </div>
+    </div>
+    <div class="about-card p-8 rounded-xl flex-1 fade">
+        <h2 class="text-2xl font-bold mb-4">About Me 😉</h2>
+        <p class="text-gray-300 mb-2">I am a 10th grade student in RPL 1 majoring in RPL. I also have a role as class president. I am ambitious in technology and nature.</p>
+        <p class="text-gray-400 mb-4">I focus on HTML, CSS, and JavaScript for building clean UI and creative web experiences. I can also use Python and Kali Linux.</p>
+        <div class="flex flex-wrap gap-4 mt-6 justify-center md:justify-start">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="w-12 h-12">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="w-12 h-12">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="w-12 h-12">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-12 h-12">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" class="w-12 h-12">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="w-12 h-12">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" class="w-12 h-12">
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- SKILLS -->
+<section class="portfolio py-20 px-8">
+<h2 class="text-4xl text-center mb-16 fade">My Skills 😎</h2>
+<div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <div class="project p-6 rounded-xl fade">
+        <h3 class="text-lg mb-2">Landing Page</h3>
+        <p>Modern landing page design.</p>
+    </div>
+    <div class="project p-6 rounded-xl fade">
+        <h3 class="text-lg mb-2">Animation Website</h3>
+        <p>Interactive animation website.</p>
+    </div>
+    <div class="project p-6 rounded-xl fade">
+        <h3 class="text-lg mb-2">UI Concept</h3>
+        <p>Creative UI experiment.</p>
+    </div>
+    <div class="project p-6 rounded-xl fade">
+        <h3 class="text-lg mb-2">Portfolio Design</h3>
+        <p>Personal portfolio concept.</p>
+    </div>
+</div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience py-20 px-8 bg-gray-900/30">
+<h2 class="text-4xl text-center mb-16 fade">Experience 💼</h2>
+<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="experience-container">
+    <div class="project p-6 rounded-xl fade"><h3 class="text-lg mb-2">Olympics</h3><p>OSSI Economics gold medal category SMA/SMK</p></div>
+    <div class="project p-6 rounded-xl fade"><h3 class="text-lg mb-2">Hiking</h3><p>Climbing many high mountains</p></div>
+    <div class="project p-6 rounded-xl fade"><h3 class="text-lg mb-2">Class President</h3><p>Class president of X RPL 1</p></div>
+    <div class="project p-6 rounded-xl fade"><h3 class="text-lg mb-2">Corps Cadet</h3><p>Indonesian cadet corps in Sanggabuana 2025</p></div>
+</div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery py-20 px-8">
+<h2 class="text-4xl text-center mb-16 fade">Gallery 📸</h2>
+<div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 fade" id="gallery">
+    <img src="sertif.jpg" alt="Photo 1" class="rounded-xl w-full h-48 object-cover cursor-pointer gallery-item">
+    <img src="ossi.jpg" alt="Photo 2" class="rounded-xl w-full h-48 object-cover cursor-pointer gallery-item">
+    <img src="gunung.jpg" alt="Photo 3" class="rounded-xl w-full h-48 object-cover cursor-pointer gallery-item">
+    <img src="kalkulator.jpg" alt="Photo 4" class="rounded-xl w-full h-48 object-cover cursor-pointer gallery-item">
+</div>
+</section>
+
+<!-- MODAL POPUP -->
+<div id="modal" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50">
+  <span id="closeModal" class="absolute top-4 right-6 text-white text-3xl cursor-pointer">&times;</span>
+  <img id="modalImg" src="" class="max-w-3xl max-h-[80vh] rounded-xl">
+</div>
+
+<footer class="text-center pb-12 text-gray-400">© 2026 My Portfolio</footer>
+
+<script>
+// CURSOR AURA
+const container = document.getElementById("trail-container");
+window.addEventListener("mousemove",(e)=>{
+    const aura = document.createElement("div");
+    aura.className="aura";
+    aura.style.left = e.clientX + "px";
+    aura.style.top = e.clientY + "px";
+    container.appendChild(aura);
+    setTimeout(()=>{ aura.remove(); },700);
+});
+
+// MAGNETIC EFFECT
+const magneticItems = document.querySelectorAll(".project");
+magneticItems.forEach(item=>{
+    item.addEventListener("mousemove",(e)=>{
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width/2;
+        const y = e.clientY - rect.top - rect.height/2;
+        item.style.transform = `translate(${x*0.2}px, ${y*0.2}px)`;
+    });
+    item.addEventListener("mouseleave",()=>{ item.style.transform="translate(0,0)"; });
+});
+
+// METEOR
+const meteorContainer = document.getElementById("meteors");
+for(let i=0;i<20;i++){
+    let meteor = document.createElement("div");
+    meteor.classList.add("meteor");
+    meteor.style.top = Math.random()*60 + "%";
+    meteor.style.left = Math.random()*100 + "%";
+    meteor.style.animationDuration = (Math.random()*3+2)+"s";
+    meteor.style.animationDelay = Math.random()*5+"s";
+    meteorContainer.appendChild(meteor);
+}
+
+// SCROLL ANIMATION
+const faders=document.querySelectorAll(".fade");
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add("show"); }
+    });
+});
+faders.forEach(el=>observer.observe(el));
+
+// GALLERY MODAL
+const galleryItems = document.querySelectorAll(".gallery-item");
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modalImg");
+const closeModal = document.getElementById("closeModal");
+
+galleryItems.forEach(item => {
+  item.addEventListener("click", () => {
+    modalImg.src = item.src;
+    modal.classList.remove("hidden");
+  });
+});
+closeModal.addEventListener("click", () => { modal.classList.add("hidden"); });
+modal.addEventListener("click", (e) => { if(e.target === modal) modal.classList.add("hidden"); });
+window.addEventListener("keydown", (e) => { if(e.key === "Escape") modal.classList.add("hidden"); });
+
+// TRANSLATE BUTTONS
+const translateBtn = document.getElementById("translateBtn");
+const originalBtn = document.getElementById("originalBtn");
+
+function translateToIndo(){
+    document.querySelector("h1.text-5xl").textContent = "Portofolio Saya";
+    const profileCard = document.querySelector(".profile-card");
+    profileCard.querySelector("h2").textContent = "Dafano";
+    profileCard.querySelector("p.text-gray-300").textContent = "Siswa / Web Developer";
+    const profileItems = profileCard.querySelectorAll(".text-left p");
+    profileItems[0].textContent = "💻 HTML / CSS / JS";
+    profileItems[1].textContent = "🎨 Desain Web";
+    profileItems[2].textContent = "🚀 Coding Kreatif";
+    profileItems[3].textContent = "⚡ Animasi UI";
+
+    const aboutCard = document.querySelector(".about-card");
+    aboutCard.querySelector("h2").textContent = "Tentang Saya 😉";
+    aboutCard.querySelectorAll("p")[0].textContent = "Saya siswa kelas 10 jurusan RPL 1. Saya juga menjabat sebagai ketua kelas. Saya tertarik pada teknologi dan alam.";
+    aboutCard.querySelectorAll("p")[1].textContent = "Saya fokus pada HTML, CSS, dan JavaScript untuk membuat UI bersih dan pengalaman web kreatif. Saya juga bisa menggunakan Python dan Kali Linux.";
+
+    document.querySelector(".portfolio h2").textContent = "Keahlian Saya 😎";
+    const skillCards = document.querySelectorAll(".portfolio .project");
+    skillCards[0].querySelector("h3").textContent = "Halaman Landing";
+    skillCards[0].querySelector("p").textContent = "Desain halaman landing modern.";
+    skillCards[1].querySelector("h3").textContent = "Website Animasi";
+    skillCards[1].querySelector("p").textContent = "Website interaktif dengan animasi.";
+    skillCards[2].querySelector("h3").textContent = "Konsep UI";
+    skillCards[2].querySelector("p").textContent = "Eksperimen UI kreatif.";
+    skillCards[3].querySelector("h3").textContent = "Desain Portofolio";
+    skillCards[3].querySelector("p").textContent = "Konsep portofolio pribadi.";
+
+    document.querySelector(".experience h2").textContent = "Pengalaman 💼";
+    document.querySelector(".gallery h2").textContent = "Galeri 📸";
+    document.querySelector("footer").textContent = "© 2026 Portofolio Saya";
+}
+
+function translateToEnglish(){
+    document.querySelector("h1.text-5xl").textContent = "My Portfolio";
+    const profileCard = document.querySelector(".profile-card");
+    profileCard.querySelector("h2").textContent = "Dafano";
+    profileCard.querySelector("p.text-gray-300").textContent = "Student / Web Developer";
+    const profileItems = profileCard.querySelectorAll(".text-left p");
+    profileItems[0].textContent = "💻 HTML / CSS / JS";
+    profileItems[1].textContent = "🎨 Web Design";
+    profileItems[2].textContent = "🚀 Creative Coding";
+    profileItems[3].textContent = "⚡ UI Animation";
+
+    const aboutCard = document.querySelector(".about-card");
+    aboutCard.querySelector("h2").textContent = "About Me 😉";
+    aboutCard.querySelectorAll("p")[0].textContent = "I am a 10th grade student in RPL 1 majoring in RPL. I also have a role as class president. I am ambitious in technology and nature.";
+    aboutCard.querySelectorAll("p")[1].textContent = "I focus on HTML, CSS, and JavaScript for building clean UI and creative web experiences. I can also use Python and Kali Linux.";
+
+    document.querySelector(".portfolio h2").textContent = "My Skills 😎";
+    const skillCards = document.querySelectorAll(".portfolio .project");
+    skillCards[0].querySelector("h3").textContent = "Landing Page";
+    skillCards[0].querySelector("p").textContent = "Modern landing page design.";
+    skillCards[1].querySelector("h3").textContent = "Animation Website";
+    skillCards[1].querySelector("p").textContent = "Interactive animation website.";
+    skillCards[2].querySelector("h3").textContent = "UI Concept";
+    skillCards[2].querySelector("p").textContent = "Creative UI experiment.";
+    skillCards[3].querySelector("h3").textContent = "Portfolio Design";
+    skillCards[3].querySelector("p").textContent = "Personal portfolio concept.";
+
+    document.querySelector(".experience h2").textContent = "Experience 💼";
+    document.querySelector(".gallery h2").textContent = "Gallery 📸";
+    document.querySelector("footer").textContent = "© 2026 My Portfolio";
+}
+
+translateBtn.addEventListener("click", translateToIndo);
+originalBtn.addEventListener("click", translateToEnglish);
+</script>
+</body>
+</html>
